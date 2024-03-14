@@ -6,14 +6,14 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 RUN apt-get update && \
   apt-get install -y build-essential \
     make wget git \
-    gcc \
-    g++ \
-    python3 \
-    python3-pip \
+    lsb-release \
+    libssl-dev \
+    pkg-config \
+    sudo \
 	&& rm -rf /var/lib/apt/lists/*
 
-ARG UID=1000
-ARG UNAME=bringauto
+ENV UID=1000
+ENV UNAME=bringauto
 
 RUN useradd -m -u $UID -s /bin/bash $UNAME
 RUN usermod --groups sudo -a $UNAME

@@ -3,7 +3,7 @@
 set -e
 
 IMAGE_NAME="$1"
-DOCKER_FILE="docker/$IMAGE_NAME/Dockerfile"
+DOCKER_FILE="$IMAGE_NAME/Dockerfile"
 
 if [[ $IMAGE_NAME = "" ]]; then
 	echo ""
@@ -27,7 +27,7 @@ if ! [[ $cwd = $script_dir ]]; then
 	exit 1
 fi
 
-docker build -f $IMAGE_NAME/Dockerfile --tag="$IMAGE_NAME" .
+docker build -f $DOCKER_FILE --tag="$IMAGE_NAME" .
 
 # Run the Docker container and execute the command to check for user bringauto with UID 1000 and GID 1000
 docker run --rm $IMAGE_NAME sh -c 'id -u bringauto 2>/dev/null | grep -q 1000 && id -g bringauto 2>/dev/null | grep -q 1000'

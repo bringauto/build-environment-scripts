@@ -8,10 +8,13 @@ RUN apt-get update && \
     wget git \
     python3 \
     python3-pip \
+    libssl-dev \
+    pkg-config \
+    sudo \
 	&& rm -rf /var/lib/apt/lists/*
 
-ARG UID=1000
-ARG UNAME=bringauto
+ENV UID=1000
+ENV UNAME=bringauto
 
 RUN useradd -m -u $UID -s /bin/bash $UNAME
 RUN usermod --groups sudo -a $UNAME
