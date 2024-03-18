@@ -9,6 +9,7 @@ RUN apt-get update && \
     lsb-release \
     libssl-dev \
     pkg-config \
+    patchelf \
     sudo \
 	&& rm -rf /var/lib/apt/lists/*
 
