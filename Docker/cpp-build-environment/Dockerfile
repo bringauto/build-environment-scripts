@@ -1,6 +1,6 @@
-FROM ubuntu:22.04
+FROM ubuntu:24.04
 
-ENV TZ=Europe/Prague
+ENV TZ=UTC
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 RUN apt-get update && \
@@ -15,17 +15,16 @@ RUN apt-get update && \
 
 ENV UID=1000
 ENV UNAME=bringauto
-
-RUN useradd -m -u $UID -s /bin/bash $UNAME
-RUN usermod --groups sudo -a $UNAME
+# Since Ubuntu24.04, there is default user 'ubuntu' with UID 1000
+RUN usermod -l $UNAME ubuntu
 RUN echo "$UNAME  ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
 USER $UNAME
 WORKDIR /home/$UNAME
 
 RUN mkdir CMake/ && cd CMake &&  \
-    wget https://github.com/Kitware/CMake/releases/download/v3.26.4/cmake-3.26.4-linux-x86_64.sh && \
-    bash cmake-3.26.4-linux-x86_64.sh --skip-license --prefix=./
+    wget https://github.com/Kitware/CMake/releases/download/v3.30.3/cmake-3.30.3-linux-x86_64.sh && \
+    bash cmake-3.30.3-linux-x86_64.sh --skip-license --prefix=./
 ENV PATH=$PATH:/home/$UNAME/CMake/bin/
 
 RUN git clone https://github.com/cmakelib/cmakelib.git
