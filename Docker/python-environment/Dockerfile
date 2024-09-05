@@ -1,4 +1,4 @@
-FROM ubuntu:22.04
+FROM ubuntu:24.04
 
 ENV TZ=Europe/Prague
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
@@ -15,9 +15,8 @@ RUN apt-get update && \
 
 ENV UID=1000
 ENV UNAME=bringauto
-
-RUN useradd -m -u $UID -s /bin/bash $UNAME
-RUN usermod --groups sudo -a $UNAME
+# Since Ubuntu24.04, there is default user 'ubuntu' with UID 1000
+RUN usermod -l $UNAME ubuntu
 RUN echo "$UNAME  ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
 USER $UNAME
