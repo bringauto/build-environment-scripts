@@ -13,10 +13,11 @@ RUN apt-get update && \
     sudo \
 	&& rm -rf /var/lib/apt/lists/*
 
-ENV UID=1000
-ENV UNAME=bringauto
-# Since Ubuntu24.04, there is default user 'ubuntu' with UID 1000
-RUN usermod -l $UNAME ubuntu
+ARG UID=5000
+ARG UNAME=bringauto
+
+RUN useradd -m -u $UID -s /bin/bash $UNAME
+RUN usermod --groups sudo -a $UNAME
 RUN echo "$UNAME  ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
 USER $UNAME
