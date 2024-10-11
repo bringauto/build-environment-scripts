@@ -24,7 +24,7 @@ RUN echo "$UNAME  ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 # Virtual environments are required, because later versions of python do not allow installing packages globally
 # PYTHON_ENVIRONMENT_PYTHON3 has to be used to when using python3 in docker images to avoid using the system python3
 ENV PYTHON_ENVIRONMENT_PYTHON3=/home/$UNAME/venv/bin/python3
-COPY python_warning.sh /home/$UNAME/python_warning.sh
+COPY ./python-environment/python_warning.sh /home/$UNAME/python_warning.sh
 RUN chmod +x /home/$UNAME/python_warning.sh
 
 USER $UNAME
