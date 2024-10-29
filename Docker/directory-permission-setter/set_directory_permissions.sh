@@ -17,7 +17,7 @@ for dir in "${directories[@]}"; do
     exit 1
   fi
   # Prevent path traversal
-  if [[ "$path" =~ \.\. ]]; then
+  if [[ "$dir" =~ \.\. ]]; then
     echo "Error: Path cannot contain ..: $dir"
     exit 1
   fi
