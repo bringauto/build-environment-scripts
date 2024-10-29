@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 # Ensure the environment variable is set
 if [ -z "$DIRECTORIES_TO_SET" ]; then
   echo "Error: DIRECTORIES_TO_SET environment variable is not set. Please provide a space-separated list of directories."
