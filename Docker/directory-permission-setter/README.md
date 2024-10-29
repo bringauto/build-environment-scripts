@@ -1,7 +1,10 @@
 # directory-permission-setter
 
-This docker image is supposed is created to allow setting owners of a directory through docker compose and kubernetes.
+This docker image is supposed to allow setting owners of a directory through docker compose and kubernetes.
 Different linux distributions have different default user IDs, therefore files being accessed through docker images need to be set to the user ID from these docker images (in our case mainly for logging).
+
+The user ID being set is 5000.
+This is the same value being used in the cpp-build-environment and python-environment images.
 
 ## Usage
 
